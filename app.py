@@ -57,37 +57,8 @@ def home():
 def success():
     error = ''
     target_img = os.path.join(os.getcwd() , 'static/images')
-    if request.method == 'POST':
-        if(request.form):
-            link = request.form.get('link')
-            try :
-                resource = urllib.request.urlopen(link)
-                unique_filename = str(uuid.uuid4())
-                filename = unique_filename+".jpg"
-                img_path = os.path.join(target_img , filename)
-                output = open(img_path , "wb")
-                output.write(resource.read())
-                output.close()
-                img = filename
-
-                class_result , prob_result = predict(img_path , model)
-
-                predictions = {
-                      "class1":class_result[0],
-                        "prob1": prob_result[0],
-                }
-
-            except Exception as e : 
-                print(str(e))
-                error = 'This image from this site is not accesible or inappropriate input'
-
-            if(len(error) == 0):
-                return  render_template('success.html' , img  = img , predictions = predictions)
-            else:
-                return render_template('index.html' , error = error) 
-
-            
-        elif (request.files):
+    if request.method == 'POST':            
+        if (request.files):
             file = request.files['file']
             if file and allowed_file(file.filename):
                 file.save(os.path.join(target_img , file.filename))
