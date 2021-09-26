@@ -20,7 +20,7 @@ html {
     background-image:linear-gradient(rgba(0, 0, 0, 0.71),rgba(0, 0, 0, 0.7)),url('b4.jpg');
     background-size: cover;
     background-position: center;
-    height: 100vh;   
+    height: 100%;   
 }
 
 
